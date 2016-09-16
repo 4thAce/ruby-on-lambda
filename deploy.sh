@@ -11,13 +11,15 @@ TRAVELING_RUBY_VERSION="20150210-2.1.5"
 # Set this up in your ~/.aws/credentials
 # Use a profile that has the ability to put
 # objects on S3 and update Lambda functions
-AWS_PROFILE="user-with-s3-and-lambda-privileges"
+AWS_PROFILE="lambda"
 # S3 Bucket where Lambda will find the Deployment Package
 AWS_BUCKET="daqri-developer"
 # The S3 Key of the Deployment Package zip file
 AWS_KEY="eng/richard.magahiz/lambda-functions/$APP_NAME-$APP_VERSION.zip"
 # The Lambda Function name, created already
 AWS_LAMBDA_FUNCTION="brakepadToSentry"
+# The AWS region
+AWS_REGION=us-east-1
 
 ########################
 ### Helper Functions ###
@@ -143,7 +145,9 @@ aws s3api put-object --bucket $AWS_BUCKET --key $AWS_KEY --body $package_zip --p
 
 
 banner "Updating Lambda"
-aws lambda update-function-code --function-name $AWS_LAMBDA_FUNCTION --s3-bucket $AWS_BUCKET --s3-key $AWS_KEY --profile $AWS_PROFILE
+echo aws lambda update-function-code --function-name $AWS_LAMBDA_FUNCTION --s3-bucket $AWS_BUCKET --s3-key $AWS_KEY --profile $AWS_PROFILE --region $AWS_REGION
+
+aws lambda update-function-code --function-name $AWS_LAMBDA_FUNCTION --s3-bucket $AWS_BUCKET --s3-key $AWS_KEY --profile $AWS_PROFILE --region $AWS_REGION
 
 
 banner "Done!"
