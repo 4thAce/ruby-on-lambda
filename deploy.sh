@@ -17,7 +17,7 @@ AWS_BUCKET="daqri-developer"
 # The S3 Key of the Deployment Package zip file
 AWS_KEY="eng/richard.magahiz/lambda-functions/$APP_NAME-$APP_VERSION.zip"
 # The Lambda Function name, created already
-AWS_LAMBDA_FUNCTION="brakepadToSentry"
+AWS_LAMBDA_FUNCTION="brakepad-to-sentry"
 # The AWS region
 AWS_REGION=us-east-1
 
